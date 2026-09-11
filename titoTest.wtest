@@ -14,3 +14,56 @@ describe "Tests de Tito" {
     assert.equals(10, tito.dosisConsumida())
   }
 }
+import bebidas.*
+import tito.*
+
+describe "Tests de Tito" {
+  test "Tito consume 10 de Whisky y su sustancia actual es Whisky" {
+    tito.consumir(10, whisky)
+    assert.equals(whisky, tito.sustanciaActual())
+    // assert.equals(1,1) → devuelve TRUE
+    // assert.equals(1,2) → devuelve FALSE
+  }
+
+  test "Tito consume 10 de Whisky y su dosis consumida es 10" {
+    tito.consumir(10, whisky)
+    assert.equals(10, tito.dosisConsumida())
+  }
+}
+describe "Tests de las bebidas"{
+  const licuadoFrutas = new Licuado()
+  const aguaConWhisky = new AguaSaborizada(bebidaBase = whisky)
+  const coctel = new Coctel()
+
+  
+    licuadoFrutas.agregarNutriente(200)
+    licuadoFrutas.agregarNutriente(300) 
+    coctel.agregarBebida(whisky)
+    coctel.agregarBebida(terere)
+  }
+
+  test "El licuado de frutas calcula bien su rendimiento proporcional" {
+    assert.equals(500, licuadoFrutas.rendimiento(1000))
+    assert.equals(250, licuadoFrutas.rendimiento(500))
+  }
+
+  test "El agua saborizada con whisky calcula su rendimiento correctamente" {
+    assert.equals(1 + (0.9 ** 10), aguaConWhisky.rendimiento(40))
+  }
+
+  test "Un cóctel multiplica los rendimientos de sus componentes equitativamente" {
+    const rendimientoEsperado = (0.9 ** 10) * 1
+    assert.equals(rendimientoEsperado, coctel.rendimiento(20))
+  }
+
+  test "Si un cóctel incluye cianuro, su rendimiento es fulminante (cero)" {
+    coctel.agregarBebida(cianuro) 
+    assert.equals(0, coctel.rendimiento(30))
+  }
+
+  test "Tito toma un coctel y calcula dinámicamente su velocidad" {
+    tito.consumir(20, coctel)
+    const velocidadEsperada = ((0.9 ** 10) * 490) / 70
+    assert.equals(velocidadEsperada, tito.velocidad())
+  }
+}
